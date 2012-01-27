@@ -3,11 +3,11 @@
  * Plugin Name: About The Author
  * Plugin URI: http://blog.ppfeufer.de/wordpress-plugin-about-the-author/
  * Description: Provides a sidebarwidget with some information about the author of a blogarticle.
- * Version: 0.2
+ * Version: 0.3
  * Author: H.-Peter Pfeufer
  * Author URI: http://ppfeufer.de
  */
-define('ABOUT_THE_AUTHOR_VERSION', '0.2');
+define('ABOUT_THE_AUTHOR_VERSION', '0.3');
 
 if(!class_exists('About_The_Author')) {
 	class About_The_Author extends WP_Widget {
@@ -154,7 +154,7 @@ if(!class_exists('About_The_Author')) {
 
 			$obj_User = get_user_by('id', $post->post_author);
 
-			$array_Userphoto = get_user_meta($post->post_author, 'about-the-author-userphoto');
+			$array_Userphoto = get_user_meta($post->post_author, 'userphoto');
 			$array_UserDescription = get_user_meta($post->post_author, 'description');
 
 			echo '<ul class="about-the-author author-info clearfix"><li>';
@@ -220,7 +220,7 @@ if(!class_exists('About_The_Author')) {
 
 				if(!empty($_REQUEST['userphoto'])) {
 
-					$array_ImageMeta = $this->get_thumbnail_by_guid($_REQUEST['userphoto'], 'userphoto');
+					$array_ImageMeta = $this->get_thumbnail_by_guid($_REQUEST['userphoto'], 'about-the-author-userphoto');
 
 					if($array_ImageMeta) {
 						$var_sUserPhoto = (string) $array_ImageMeta['url'];
