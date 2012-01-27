@@ -3,11 +3,11 @@
  * Plugin Name: About The Author
  * Plugin URI: http://blog.ppfeufer.de/wordpress-plugin-about-the-author/
  * Description: Provides a sidebarwidget with some information about the author of a blogarticle.
- * Version: 0.1
+ * Version: 0.2
  * Author: H.-Peter Pfeufer
  * Author URI: http://ppfeufer.de
  */
-define('ABOUT_THE_AUTHOR_VERSION', '0.1');
+define('ABOUT_THE_AUTHOR_VERSION', '0.2');
 
 if(!class_exists('About_The_Author')) {
 	class About_The_Author extends WP_Widget {
@@ -22,7 +22,7 @@ if(!class_exists('About_The_Author')) {
 				load_plugin_textdomain($this->var_sTextdomain, PLUGINDIR . '/' . dirname(plugin_basename(__FILE__)) . '/l10n', dirname(plugin_basename(__FILE__)) . '/l10n');
 			}
 
-			add_image_size('userphoto', 125, 125, true);
+			add_image_size('about-the-author-userphoto', 250, 250, true);
 
 			add_action('admin_head', array(
 				&$this,
@@ -154,7 +154,7 @@ if(!class_exists('About_The_Author')) {
 
 			$obj_User = get_user_by('id', $post->post_author);
 
-			$array_Userphoto = get_user_meta($post->post_author, 'userphoto');
+			$array_Userphoto = get_user_meta($post->post_author, 'about-the-author-userphoto');
 			$array_UserDescription = get_user_meta($post->post_author, 'description');
 
 			echo '<ul class="about-the-author author-info clearfix"><li>';
