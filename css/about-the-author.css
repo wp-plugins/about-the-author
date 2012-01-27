@@ -1,0 +1,6 @@
+@charset "UTF-8";
+.about-the-author li {display:block;}
+.about-the-author li .author-photo {float:left; margin-right:10px; border:none;}
+.about-the-author li .author-name, .about-the-author li .author-description {display:block;}
+.about-the-author li .author-name {font-weight:bold; margin-bottom:10px;}
+
