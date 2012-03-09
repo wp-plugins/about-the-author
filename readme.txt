@@ -4,7 +4,7 @@ Donate link:
 Tags: blog, author, sidebar, widget
 Requires at least: 3.2
 Tested up to: 3.4-alpha-19719
-Stable tag: 0.3
+Stable tag: 0.4
 
 Provides a sidebarwidget with some information about the author of a blogarticle.
 
@@ -42,6 +42,10 @@ Provides a sidebarwidget with some information about the author of a blogarticle
 3. The new field in "your profile".
 
 == Changelog ==
+
+= 0.4 =
+* (09. 03. 2012)
+* Fixed a bug where the own author image was overwritten when editing another authors profile. Thanks to <a href="http://privat48.de/">Roland</a> for reporting.
 
 = 0.3 =
 * (27. 01. 2012)
