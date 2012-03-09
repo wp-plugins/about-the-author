@@ -3,15 +3,14 @@
  * Plugin Name: About The Author
  * Plugin URI: http://blog.ppfeufer.de/wordpress-plugin-about-the-author/
  * Description: Provides a sidebarwidget with some information about the author of a blogarticle.
- * Version: 0.3
+ * Version: 0.4
  * Author: H.-Peter Pfeufer
  * Author URI: http://ppfeufer.de
  */
-define('ABOUT_THE_AUTHOR_VERSION', '0.3');
-
 if(!class_exists('About_The_Author')) {
 	class About_The_Author extends WP_Widget {
 		private $var_sTextdomain;
+
 		/**
 		 * Cunstructor // Intit functions and actions
 		 */
@@ -65,7 +64,6 @@ if(!class_exists('About_The_Author')) {
 
 			$this->WP_Widget('about_the_author', __('About The Author', $this->var_sTextdomain), $widget_ops, $control_ops);
 		} // END function About_The_Author()
-
 
 		/**
 		 * Widgetform
@@ -135,7 +133,6 @@ if(!class_exists('About_The_Author')) {
 					echo $before_title . $title . $after_title;
 				} // END if(!empty($title))
 
-
 				echo $this->about_the_author_output($instance, 'widget');
 				echo $after_widget;
 			}
@@ -185,7 +182,6 @@ if(!class_exists('About_The_Author')) {
 
 			if($current_screen->id == 'profile' || $current_screen->id == 'user-edit') {
 				global $profileuser;
-				global $current_user;
 
 				$array_UserPhoto = get_user_meta($profileuser->ID, 'userphoto');
 				$var_sUserPhoto = (isset($array_UserPhoto['0'])) ? $array_UserPhoto['0'] : '';
@@ -215,11 +211,7 @@ if(!class_exists('About_The_Author')) {
 			global $current_screen;
 
 			if($current_screen->id == 'profile' || $current_screen->id == 'user-edit') {
-				global $profileuser;
-				global $current_user;
-
 				if(!empty($_REQUEST['userphoto'])) {
-
 					$array_ImageMeta = $this->get_thumbnail_by_guid($_REQUEST['userphoto'], 'about-the-author-userphoto');
 
 					if($array_ImageMeta) {
@@ -228,10 +220,9 @@ if(!class_exists('About_The_Author')) {
 						$var_sUserPhoto = (string) $_REQUEST['userphoto'];
 					} // END if($array_ImageMeta)
 
-
-					update_user_meta($current_user->ID, 'userphoto', $var_sUserPhoto);
+					update_user_meta($_REQUEST['user_id'], 'userphoto', $var_sUserPhoto);
 				} else {
-					delete_user_meta($current_user->ID, 'userphoto');
+					delete_user_meta($_REQUEST['user_id'], 'userphoto');
 				} // END if(!empty($_REQUEST['userphoto']))
 			} // END if($current_screen->id == 'profile' || $current_screen->id == 'user-edit')
 		} // END function userimage_update()
@@ -337,6 +328,8 @@ if(!class_exists('About_The_Author')) {
 		 * @since 0.1
 		 */
 		function update_notice() {
+			$array_ATAW_Data = get_plugin_data(__FILE__);
+			$var_sUserAgent = 'Mozilla/5.0 (X11; Linux x86_64; rv:5.0) Gecko/20100101 Firefox/5.0 WorPress Plugin 2-Click Social Media Buttons (Version: ' . $array_ATAW_Data['Version'] . ') running on: ' . get_bloginfo('url');
 			$url = 'http://plugins.trac.wordpress.org/browser/about-the-author/trunk/readme.txt?format=txt';
 			$data = '';
 
@@ -344,17 +337,18 @@ if(!class_exists('About_The_Author')) {
 				$data = file_get_contents($url);
 			} else {
 				if(function_exists('curl_init')) {
-					$ch = curl_init();
-					curl_setopt($ch, CURLOPT_URL, $url);
-					curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
-					$data = curl_exec($ch);
-					curl_close($ch);
+					$cUrl_Channel = curl_init();
+					curl_setopt($cUrl_Channel, CURLOPT_URL, $url);
+					curl_setopt($cUrl_Channel, CURLOPT_RETURNTRANSFER, 1);
+					curl_setopt($cUrl_Channel, CURLOPT_USERAGENT, $var_sUserAgent);
+					$data = curl_exec($cUrl_Channel);
+					curl_close($cUrl_Channel);
 				} // END if(function_exists('curl_init'))
 			} // END if(ini_get('allow_url_fopen'))
 
 			if($data) {
 				$matches = null;
-				$regexp = '~==\s*Changelog\s*==\s*=\s*[0-9.]+\s*=(.*)(=\s*' . preg_quote(ABOUT_THE_AUTHOR_VERSION) . '\s*=|$)~Uis';
+				$regexp = '~==\s*Changelog\s*==\s*=\s*[0-9.]+\s*=(.*)(=\s*' . preg_quote($array_ATAW_Data['Version']) . '\s*=|$)~Uis';
 
 				if(preg_match($regexp, $data, $matches)) {
 					$changelog = (array) preg_split('~[\r\n]+~', trim($matches[1]));
@@ -364,7 +358,7 @@ if(!class_exists('About_The_Author')) {
 					$version = 99;
 
 					foreach($changelog as $index => $line) {
-						if(version_compare($version, ABOUT_THE_AUTHOR_VERSION, ">")) {
+						if(version_compare($version, $array_ATAW_Data['Version'], ">")) {
 							if(preg_match('~^\s*\*\s*~', $line)) {
 								if(!$ul) {
 									echo '<ul style="list-style: disc; margin-left: 20px;">';
