@@ -1,10 +1,10 @@
 ﻿=== About The Autor ===
 Contributors: ppfeufer
-Donate link: 
+Donate link: http://flattr.com/thing/601539/WordPress-Plugin-About-The-Author
 Tags: blog, author, sidebar, widget
 Requires at least: 3.2
-Tested up to: 3.4-alpha-19719
-Stable tag: 0.4
+Tested up to: 3.4-alpha
+Stable tag: 1.0
 
 Provides a sidebarwidget with some information about the author of a blogarticle.
 
@@ -42,6 +42,10 @@ Provides a sidebarwidget with some information about the author of a blogarticle
 3. The new field in "your profile".
 
 == Changelog ==
+
+= 1.0 =
+* (28. 03. 2012)
+* Finally I think were out of beta-state and can release a 1.x Version :-)
 
 = 0.4 =
 * (09. 03. 2012)
