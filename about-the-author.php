@@ -3,19 +3,21 @@
  * Plugin Name: About The Author
  * Plugin URI: http://blog.ppfeufer.de/wordpress-plugin-about-the-author/
  * Description: Provides a sidebarwidget with some information about the author of a blogarticle.
- * Version: 0.4
+ * Version: 1.0
  * Author: H.-Peter Pfeufer
  * Author URI: http://ppfeufer.de
  */
 if(!class_exists('About_The_Author')) {
 	class About_The_Author extends WP_Widget {
 		private $var_sTextdomain;
+		private $var_sFlattrLink;
 
 		/**
 		 * Cunstructor // Intit functions and actions
 		 */
 		function About_The_Author() {
 			$this->var_sTextdomain = 'about-the-author';
+			$this->var_sFlattrLink = 'http://flattr.com/thing/601539/WordPress-Plugin-About-The-Author';
 
 			if(function_exists('load_plugin_textdomain')) {
 				load_plugin_textdomain($this->var_sTextdomain, PLUGINDIR . '/' . dirname(plugin_basename(__FILE__)) . '/l10n', dirname(plugin_basename(__FILE__)) . '/l10n');
@@ -86,6 +88,11 @@ if(!class_exists('About_The_Author')) {
 			// Imagesize
 			echo '<p style="border-bottom: 1px solid #DFDFDF;"><strong>' . __('Imagesize (in Pixel)', $this->var_sTextdomain) . '</strong></p>';
 			echo '<p><input id="' . $this->get_field_id('about-the-author_imagesize') . '" name="' . $this->get_field_name('about-the-author_imagesize') . '" type="text" value="' . $instance['about-the-author_imagesize'] . '" /></p>';
+			echo '<p style="clear:both;"></p>';
+
+			// Donate
+			echo '<p style="border-bottom: 1px solid #DFDFDF;"><strong>' . __('Like this Widget?', $this->var_sTextdomain) . '</strong></p>';
+			echo '<p><a href="' . $this->var_sFlattrLink . '" target="_blank"><img src="http://api.flattr.com/button/flattr-badge-large.png" alt="Flattr this" title="Flattr this" border="0" /></a></p>';
 			echo '<p style="clear:both;"></p>';
 		} // END function form($instance)
 
@@ -329,7 +336,7 @@ if(!class_exists('About_The_Author')) {
 		 */
 		function update_notice() {
 			$array_ATAW_Data = get_plugin_data(__FILE__);
-			$var_sUserAgent = 'Mozilla/5.0 (X11; Linux x86_64; rv:5.0) Gecko/20100101 Firefox/5.0 WorPress Plugin 2-Click Social Media Buttons (Version: ' . $array_ATAW_Data['Version'] . ') running on: ' . get_bloginfo('url');
+			$var_sUserAgent = 'Mozilla/5.0 (X11; Linux x86_64; rv:5.0) Gecko/20100101 Firefox/5.0 WorPress Plugin About the Author (Version: ' . $array_ATAW_Data['Version'] . ') running on: ' . get_bloginfo('url');
 			$url = 'http://plugins.trac.wordpress.org/browser/about-the-author/trunk/readme.txt?format=txt';
 			$data = '';
 
