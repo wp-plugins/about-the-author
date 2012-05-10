@@ -3,7 +3,7 @@
  * Plugin Name: About The Author
  * Plugin URI: http://blog.ppfeufer.de/wordpress-plugin-about-the-author/
  * Description: Provides a sidebarwidget with some information about the author of a blogarticle.
- * Version: 1.0
+ * Version: 1.0.1
  * Author: H.-Peter Pfeufer
  * Author URI: http://ppfeufer.de
  */
@@ -163,12 +163,12 @@ if(!class_exists('About_The_Author')) {
 
 			echo '<ul class="about-the-author author-info clearfix"><li>';
 
-			if(isset($array_Userphoto['0']) || isset($array_UserDescription['0'])) {
+			if(!empty($array_Userphoto['0']) || !empty($array_UserDescription['0'])) {
 				if(isset($array_Userphoto['0'])) {
 					echo '<img class="about-the-author author-photo" src="' . $array_Userphoto['0'] . '" alt="' . __('Authorimage: ', $this->var_sTextdomain) . $obj_User->display_name . '" title="' . __('Authorimage: ', $this->var_sTextdomain) . $obj_User->display_name . '" width="' . $args['about-the-author_imagesize'] . '" height="auto" />';
 				} // END if(isset($array_Userphoto['0']))
 
-				if(isset($array_UserDescription['0'])) {
+				if(!empty($array_UserDescription['0'])) {
 					echo '<span class="about-the-author author-name">' . $obj_User->display_name . '</span>';
 					echo '<span class="about-the-author author-description">' . $array_UserDescription['0'] . '</span>';
 				} // END if(isset($array_UserDescription['0']))
