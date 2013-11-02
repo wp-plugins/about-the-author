@@ -3,7 +3,7 @@
  * Plugin Name: About The Author
  * Plugin URI: http://blog.ppfeufer.de/wordpress-plugin-about-the-author/
  * Description: Provides a sidebarwidget with some information about the author of a blogarticle.
- * Version: 1.1
+ * Version: 1.2
  * Author: H.-Peter Pfeufer
  * Author URI: http://ppfeufer.de
  */

@@ -3,8 +3,8 @@ Contributors: ppfeufer
 Donate link: http://flattr.com/thing/601539/WordPress-Plugin-About-The-Author
 Tags: blog, author, sidebar, widget
 Requires at least: 3.2
-Tested up to: 3.5
-Stable tag: 1.1
+Tested up to: 3.8-alpha
+Stable tag: 1.2
 
 Provides a sidebarwidget with some information about the author of a blogarticle.
 
@@ -42,6 +42,10 @@ Provides a sidebarwidget with some information about the author of a blogarticle
 3. The new field in "your profile".
 
 == Changelog ==
+= 1.2 =
+* (02. 11. 2013)
+* Tested up to WordPress 3.8-alpha
+
 = 1.1 =
 * (02. 01. 2013)
 * Ready for WordPress 3.5
